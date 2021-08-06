@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type = "text/javascript"
+        src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/stylechoco.css">
+    <link rel="stylesheet" href="./css/stylequiz.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <title>Chocolate Cosmos</title>
+</head>
+<body class="grey lighten-3 bodey" id="bodey">
+  <!-- NAVBAR -->
+  <nav class="z-depth-0 navio pink darken-3 sticky">
+    <div class="nav-wrapper container row">
+      <a class="sidenav-trigger left hide-on-med-and-up" href="#!" data-target="mobile-links">
+        <i class="material-icons">menu</i>
+      </a>
+        <img src="images/choco2.png" style="width: 60px; margin-top: 10px;">
+        <a class="brand-logo flow-text" onclick="location.href='googlepay.html';">
+        Quiz Infinity
+      </a>
+      <ul id="nav-mobile" class="right nav-wrapper-fixed hide-on-small-only">
+      <!-- Dropdown Trigger -->
+      <li class="logged-in">
+        <a class="" href="#!" onclick="location.href='categories.html';">Categories</a>
+      </li>
+      <li class="logged-in">
+        <a href="#" id="reportshtml" onclick="location.href='quizDetails.html';">Quiz Details</a>
+      </li>
+      <li class="logged-in">
+        <a href="#" id="reportshtml" onclick="location.href='quizNumbers.html';">Quiz Numbers</a>
+      </li>
+      <li class="logged-in">
+        <a href="#" class="white-text modal-trigger"  onclick="location.href='landing.html';">Help</a>
+      </li>
+      <li class="logged-in">
+        <a class="sidenav-trigger show-on-large white-text 4 procardtrigpc" data-target="slide-out">Profile</a>
+      </li>
+          <!-- <li class="logged-out">
+            <a href="#" class="white-text" id="logout">Log Out</a>
+          </li> -->
+      </ul>
+    </div>
+  </nav>
+
+<p id="warningfy" class="error red-text center-align"></p><br/>
+  <!-- transactions -->
+  <div class="row tranco">
+    <form id="transactform" class="container white trancona" >
+
+        <div class="container fifty center">
+                    <label class="imagelabel hideout" id="imagecontainer">
+                      <img class="imgprocd center" id="output_image" src="images/addlogo.png"><br/>
+                      <!-- <input type="file" accept="image/*"  style="display:none" onchange="chooseFile(event)"/> -->
+                      <input type="file" accept="image/*"  style="display:none" onchange="preview_image(event)"/>
+                    </label>
+          <div class="center quadiv">
+          <input  id="title"  placeholder="Title" class=" traam" />
+          <input  id="category"  placeholder="Category" class=" traam" />
+          <input  id="description"  placeholder="Description" class="wrapme" />
+          </div>
+
+        </div>
+        <br/>
+          <!-- <li class="list-group-item chooseimage">
+              <div class="input-group mb-3">
+                  <div class="custom-file ">
+                      <input type="file"  class="custom-file-input" name="thumbnail" id="thumbnail">
+                      <label class="custom-file-label" for="thumbnail">Choose file</label>
+                  </div>
+              </div> -->
+              <!-- <div class="img-thumbnail  text-center">
+                  <img src="chick.jpg" id="quizimage" class="quizimage">
+              </div> -->
+          <!-- </li> -->
+        <br/>
+        <button class="btn teal btntrans z-depth-2" id="createquiz">Create Quiz</button>
+    </form>
+</div>
+
+  </div>
+
+<!-- <script>
+$(function(){
+$('#thumbnail').on('change', function() {
+    var file = $(this).get(0).files;
+    var reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.addEventListener("load", function(e) {
+    var image = e.target.result;
+$("#imgthumbnail").attr('src', image);
+});
+});
+});
+</script> -->
+
+  <div class="" id="bottomplaceholder"></div>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAUqj1cf-SUEGrzTxsIaqEKVBuRo7BzBds",
+    authDomain: "quiz-infinity-b7b39.firebaseapp.com",
+    projectId: "quiz-infinity-b7b39",
+    storageBucket: "quiz-infinity-b7b39.appspot.com",
+    messagingSenderId: "606782836246",
+    appId: "1:606782836246:web:91c20cb57447a27184ef37",
+    measurementId: "G-BF4T58YW17"
+  };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+
+  // auth and firestore references
+      const auth=firebase.auth();
+      const db=firebase.firestore();
+      var storage = firebase.storage();
+      var storageRef = storage.ref();
+  // update firestore settings
+      db.settings({timestampsInSnapshots: true});
+
+  </script>
+  <script src="js/quizDetails.js"></script>
+</body>
+<div id="container"></div>

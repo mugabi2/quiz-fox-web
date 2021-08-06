@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type = "text/javascript"
+          src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="./css/create.css">
+<!-- standalone -->
+<script src="http://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<link href="css/bootstrap-tour-standalone.min.css" rel="stylesheet">
+<script src="js/bootstrap-tour-standalone.min.js"></script>
+ <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Quiz Infinity Create</title>
+  </head>
+  <body>
+
+      <!-- NAVBAR -->
+      <nav class="z-depth-0 navio pink darken-3 sticky">
+        <div class="nav-wrapper container row">
+          <a class="sidenav-trigger left hide-on-med-and-up" href="#!" data-target="mobile-links">
+            <i class="material-icons">menu</i>
+          </a>
+            <img src="images/choco2.png" style="width: 60px; margin-top: 10px;">
+            <a class="brand-logo flow-text" onclick="location.href='googlepay.html';">
+            Quiz Infinity
+          </a>
+          <ul id="nav-mobile" class="right nav-wrapper-fixed hide-on-small-only">
+          <!-- Dropdown Trigger -->
+          <li class="logged-in">
+            <a class="" href="#!" onclick="location.href='categories.html';">Categories</a>
+          </li>
+          <li class="logged-in">
+            <a href="#" id="reportshtml" onclick="location.href='quizDetails.html';">Quiz Details</a>
+          </li>
+          <li class="logged-in">
+            <a href="#" id="reportshtml" onclick="location.href='quizNumbers.html';">Quiz Numbers</a>
+          </li>
+          <li class="logged-in">
+            <a href="#" class="white-text modal-trigger"  onclick="location.href='landing.html';">Help</a>
+          </li>
+          <li class="logged-in">
+            <a class="sidenav-trigger show-on-large white-text 4 procardtrigpc" data-target="slide-out">Profile</a>
+          </li>
+              <!-- <li class="logged-out">
+                <a href="#" class="white-text" id="logout">Log Out</a>
+              </li> -->
+          </ul>
+        </div>
+      </nav>
+    <div class="container threebig row">
+      <a class="container threes col s12 m4 l4">
+        <div class="modal-content">
+          <h5 class="headcrt black-text">Create Category</h5><br />
+          <form id="categories-formcrt">
+            <div class="input-field impu">
+              <input class="" type="text" id="category_namecrt"/>
+              <label for="category_name">Category name</label>
+            </div>
+              <!-- /////////////// -->
+                    <div class="progress progbarcatrt ghost" id="progbarcatrt">
+                          <div class="indeterminate"></div>
+                      </div>
+              <!-- //////////////// -->
+            <button class="btn teal z-depth-2" id="createCatBtn" value="Create Category">Create Category</button>
+        </form>
+        </div>
+        <div class="bottomcol">
+        <div class="container" style="mar00gin-top: 40px;" background="#00ffff">
+        <h5 class="center hsix black-text">Category</h5>
+          <ul class="collapsible z-depth-0 guides guidesa" style="border: none;">
+          </ul>
+        </div>
+        </div>
+      </a>
+    </div>
+    <div class="" id="bottomplaceholder"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+    <script>
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAUqj1cf-SUEGrzTxsIaqEKVBuRo7BzBds",
+  authDomain: "quiz-infinity-b7b39.firebaseapp.com",
+  projectId: "quiz-infinity-b7b39",
+  storageBucket: "quiz-infinity-b7b39.appspot.com",
+  messagingSenderId: "606782836246",
+  appId: "1:606782836246:web:91c20cb57447a27184ef37",
+  measurementId: "G-BF4T58YW17"
+};
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // firebase.analytics();
+
+    // auth and firestore references
+        const auth=firebase.auth();
+        const db=firebase.firestore();
+        var storage = firebase.storage();
+        var storageRef = storage.ref();
+    // update firestore settings
+        db.settings({timestampsInSnapshots: true});
+
+    </script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="js/categories.js"></script>
+    <!-- <script src="js/tutorial.js"></script> -->
+  </body>
+</html>
