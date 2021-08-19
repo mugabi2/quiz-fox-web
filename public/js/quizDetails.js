@@ -1,4 +1,4 @@
-var quizzes;
+var quizzes, categoryNumb;
 var one="1"
 var quizCode;
 var photoUrl;
@@ -10,6 +10,11 @@ var email_key="items";
 var instructorEmail = localStorage.getItem(email_key);
 var instructorName = localStorage.getItem(name_key);
 var profilePhotoUrl = localStorage.getItem(profilePhotoUrl_key);
+
+//POPULATE CATEGORIES SELECT
+db.collection("CATEGORIES").onSnapshot(snapshot=>{
+setupDropdownAcc(snapshot.docs);
+})
 
 const docReftss = db.collection("INFORMATION").doc("quizzes");
   var statement = docReftss.get().then(doc => {
@@ -49,6 +54,23 @@ $("#createquiz").click(function(event){
     quizzes=quizzes+1;
     console.log(instructor);
 
+    // GET NUMBER OF QUIZZES IN CATEGORIES
+    const docReftss = db.collection("CATEGORIES").doc(category);
+      var statement = docReftss.get().then(doc => {
+               if (doc.exists) {
+      jQuery.each(doc.data(), function (key, value) {
+                if(key=="numberOfQuizzes"){
+                  categoryNumb=parseInt(value)+1;
+                  categoryNumb=categoryNumb.toString();
+                }
+    })
+    } else {
+    console.error('Please check your collection and document name in the [firestore] shortcode!');
+    }
+    }).catch(error => {
+    console.error('Please check your collection and document name in the [firestore] shortcode!', error);
+    });
+
 console.log(quizCode+"ddddddd");
       db.collection("QUIZZES").doc(quizCode).set({
           title: title,
@@ -60,6 +82,7 @@ console.log(quizCode+"ddddddd");
           rating: rating,
           students: students,
           hasPhoto: "1",
+          ranking: "1",
           photoUrl: photoUrl,
           numberOfQuestions: numberOfQuestions,
           quizCode: quizCode,
@@ -71,11 +94,20 @@ console.log(quizCode+"ddddddd");
               db.collection(quizCode).doc(one).set({
               hasPhoto:0
               }).then(() => {
+                // UPDATE NUMBER OF QUIZZES
                 db.collection("INFORMATION").doc("quizzes").update({
                 numberOfQuizzes:quizzes
                 }).then(() => {
-            window.location.href = "quizNumbers.html";
-          }).catch(err => {
+
+                  // UPDATE NUMBER OF QUIZZES IN CATEGORIES
+                    db.collection("CATEGORIES").doc(category).update({
+                    numberOfQuizzes:categoryNumb
+                    }).then(() => {
+                  window.location.href = "quizNumbers.html";
+                  }).catch(err => {
+                  console.log(err.message);
+                  });
+                          }).catch(err => {
             console.log(err.message);
           });
               }).catch(err => {
@@ -103,3 +135,31 @@ console.log(quizCode+"ddddddd");
       })
     })
   }
+
+// dropdown
+const dropdownpro=document.querySelector('.crtitdrp');
+
+const setupDropdownAcc =(data)=>{
+  let html=`
+    <select class="team wonder " id="category">
+    <option>Select Quiz Category</option>`;
+  let htmlEnd=`
+</select>`;
+  var list='';
+  data.forEach(doc=>{
+    const drops=doc.data();
+    const li=`
+    <option>${doc.id}</option>
+    `;
+    html+=li;
+  });
+  html+=htmlEnd;
+dropdownpro.innerHTML=html;
+// console.log(html);
+  // Or with jQuery
+
+// bring select to life
+    $(document).ready(function(){
+      $('select').formSelect();
+    });
+}
